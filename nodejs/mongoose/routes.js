@@ -29,36 +29,36 @@ var beerReturn = function(response, data){
 }
  
 var beerCreate = function(request, response){
-        var dados = {
-                  name: 'Heineken',
-                  description: 'Vish',
-                  alcohol: 4.5,
-                  category: 'pilsen'
-                }
- 
-                var model = new Beer(dados);
- 
-                model.save(function (err, data) {
-                  if (err){
-                    console.log('Erro: ', err);
-                  }
-                        console.log('Cerveja inserida: ', data);
-                        // response.writeHead(200, {"Content-Type": "application/json"});
-                        // response.write(data);
-                        // response.end();
-                        beerReturn(response, data);
-                });
+  var dados = {
+    name: 'Skol',
+    description: 'Shit',
+    alcohol: 4.5,
+    category: 'pilsen'
+  }
+
+  var model = new Beer(dados);
+
+  model.save(function (err, data) {
+    if (err){
+      console.log('Erro: ', err);
+    }
+          console.log('Cerveja inserida: ', data);
+          // response.writeHead(200, {"Content-Type": "application/json"});
+          // response.write(data);
+          // response.end();
+          beerReturn(response, data);
+  });
 }
  
 var beerRetrieve = function(request, response){
-        Beer.find(function (err, beers) {
-          if(err) {
-            console.log(err);
-          } else {
-            console.log(beers);
-                beerReturn(response, beers);
-          }
-        })
+    Beer.find(function (err, beers) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log(beers);
+            beerReturn(response, beers);
+      }
+    })
 }
  
 var beerUpdate = function(request, response){
@@ -67,35 +67,50 @@ var beerUpdate = function(request, response){
     
     var mod = {alcohol: 4};
 
-        Beer.update(query, mod, function(err, beer) {
-          if(err) {
-            console.log(err);
-          } else {
-            console.log('Cerveja atualizada com sucesso');
-                beerReturn(response, beer);
-          }
-        });
+    Beer.update(query, mod, function(err, beer) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log('Cerveja atualizada com sucesso');
+            beerReturn(response, beer);
+      }
+    });
 }
  
 var beerDelete = function(request, response){
     var query = {name: 'Skol'};
 
-        Beer.remove(query, function(err, beer) {
-          if(err) {
-            console.log(err);
-          } else {
-            console.log('Cerveja deletada com sucesso');
-            beerReturn(response, beer);
-          }
-        });
+    Beer.remove(query, function(err, beer) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log('Cerveja deletada com sucesso');
+        beerReturn(response, beer);
+      }
+    });
 }
 
-// var _beer = {
-//   beerDelete
-// }
+var beerGet = function(request, response){
+  var url = request.url; // /beer/83748923hdnskajfo
+  var id = url.split('/').slice(2,3);
+  var query = {_id: id};
+
+  Beer.findOne(query, function (err, beers) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(beers);
+      beerReturn(response, beers);
+    }
+  })
+}
 
 exports.create = beerCreate;
 exports.retrieve = beerRetrieve;
 exports.update = beerUpdate;
-exports.dalete = beerDelete;
+exports.delete = beerDelete;
+exports.get = beerGet;
+
+
+
 

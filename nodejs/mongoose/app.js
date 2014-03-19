@@ -11,6 +11,9 @@ http.createServer(function(request, response) {
     case '/beer/find':
       beer.retrieve(request, response);
       break;
+    case '/beer/532a266262b9570000cd288c':
+      beer.get(request, response);
+      break;
     case '/beer/update':
       beer.update(request, response);
       break;
