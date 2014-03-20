@@ -1,53 +1,15 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/workshop-online-marco');
+var _model = require("./models/beer");
  
-var db = mongoose.connection;
-db.on('error', function(err){
-    console.log('Erro de conexao.', err)
-});
-db.once('open', function () {
-  console.log('Conexão aberta.')
-});
- 
-var Schema = mongoose.Schema;
- 
-var BeerSchema = new Schema({
-  name: { type: String, default: '' },
-  description: { type: String, default: '' },
-  alcohol: { type: Number, min: 0},
-  category: { type: String, default: ''},
-  created: { type: Date, default: Date.now }
-});
- 
-var Beer = mongoose.model('Beer', BeerSchema);
- 
-var beerReturn = function(response, data){
- 
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.write(JSON.stringify(data));
-        response.end();
-}
  
 var beerCreate = function(request, response){
   var dados = {
-    name: 'Skol',
-    description: 'Shit',
+    name: 'Norteña',
+    description: 'Buena',
     alcohol: 4.5,
     category: 'pilsen'
   }
 
-  var model = new Beer(dados);
-
-  model.save(function (err, data) {
-    if (err){
-      console.log('Erro: ', err);
-    }
-          console.log('Cerveja inserida: ', data);
-          // response.writeHead(200, {"Content-Type": "application/json"});
-          // response.write(data);
-          // response.end();
-          beerReturn(response, data);
-  });
+  _model.create(request, response, dados);
 }
  
 var beerRetrieve = function(request, response){
@@ -56,7 +18,7 @@ var beerRetrieve = function(request, response){
         console.log(err);
       } else {
         console.log(beers);
-            beerReturn(response, beers);
+            makeResponse(response, beers);
       }
     })
 }
@@ -72,7 +34,7 @@ var beerUpdate = function(request, response){
         console.log(err);
       } else {
         console.log('Cerveja atualizada com sucesso');
-            beerReturn(response, beer);
+            makeResponse(response, beer);
       }
     });
 }
@@ -85,7 +47,7 @@ var beerDelete = function(request, response){
         console.log(err);
       } else {
         console.log('Cerveja deletada com sucesso');
-        beerReturn(response, beer);
+        makeResponse(response, beer);
       }
     });
 }
@@ -100,7 +62,7 @@ var beerGet = function(request, response){
       console.log(err);
     } else {
       console.log(beers);
-      beerReturn(response, beers);
+      makeResponse(response, beers);
     }
   })
 }
