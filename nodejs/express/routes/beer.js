@@ -34,9 +34,8 @@ var beerDelete = function(req, res){
 }
 
 var beerGet = function(req, res){
-  var url = req.url; // /beer/83748923hdnskajfo
-  var id = url.split('/').slice(3,4);
-  var query = {_id: id};
+  var name = req.params.name;
+  var query = {name: name};
 
   _model.get(req, res, query);
 }

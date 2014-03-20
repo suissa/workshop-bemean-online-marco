@@ -39,13 +39,16 @@ app.get('/users', user.list);
 
 // Beer API
 // create
-app.get('/beer/create', beer.create);
+app.post('/beer', beer.create);
 // retrieve
 app.get('/beer', beer.retrieve);
 // update
 app.get('/beer/update', beer.update);
 // create
 app.get('/beer/delete', beer.delete);
+
+// get
+app.get('/beer/:name', beer.get);
 
 
 http.createServer(app).listen(app.get('port'), function(){
