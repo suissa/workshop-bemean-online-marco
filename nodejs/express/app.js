@@ -6,6 +6,8 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+// adiciono o módulo de beer
+var beer = require('./routes/beer');
 var http = require('http');
 var path = require('path');
 
@@ -34,6 +36,11 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 // conferir a função em ./routes/user.js
 app.get('/users', user.list);
+
+// Beer API
+// find
+app.get('/beer', beer.retrieve);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

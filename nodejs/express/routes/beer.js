@@ -1,7 +1,7 @@
-var _model = require("./models/beer");
+var _model = require("../models/beer");
  
  
-var beerCreate = function(request, response){
+var beerCreate = function(req, res){
   var dados = {
     name: 'Norteña',
     description: 'Buena',
@@ -9,34 +9,34 @@ var beerCreate = function(request, response){
     category: 'pilsen'
   }
 
-  _model.create(request, response, dados);
+  _model.create(req, res, dados);
 }
  
-var beerRetrieve = function(request, response){
-  _model.find(request, response);
+var beerRetrieve = function(req, res){
+  _model.find(req, res);
 }
  
-var beerUpdate = function(request, response){
+var beerUpdate = function(req, res){
 
   var query = {name: 'Heineken'};
   
   var mod = {description: 'TESTE'};
 
-  _model.update(request, response, query, mod);
+  _model.update(req, res, query, mod);
 }
  
-var beerDelete = function(request, response){
+var beerDelete = function(req, res){
     var query = {name: 'Skol'};
 
-    _model.delete(request, response, query);
+    _model.delete(req, res, query);
 }
 
-var beerGet = function(request, response){
-  var url = request.url; // /beer/83748923hdnskajfo
+var beerGet = function(req, res){
+  var url = req.url; // /beer/83748923hdnskajfo
   var id = url.split('/').slice(2,3);
   var query = {_id: id};
 
-  _model.get(request, response, query);
+  _model.get(req, res, query);
 }
 
 exports.create = beerCreate;
