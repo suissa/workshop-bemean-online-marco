@@ -31,8 +31,8 @@ var beerUpdate = function(req, res){
  
 var beerDelete = function(req, res){
   var url = req.url; // /beer/83748923hdnskajfo
-  // var name = url.split('/').slice(3,4);
-  var query = {name: 'Heineken'};
+  var name = req.params.name;
+  var query = {name: name};
 
   _model.delete(req, res, query);
 }
