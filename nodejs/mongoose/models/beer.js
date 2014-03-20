@@ -34,6 +34,17 @@ var create = function(request, response, data){
   });
 }
 
+var find = function(request, response){
+  _model.find(function (err, beers) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(beers);
+          makeResponse(response, beers);
+    }
+  });
+}
+
 var makeResponse = function(response, data){
   response.writeHead(200, {"Content-Type": "text/plain"});
   response.write(JSON.stringify(data));
@@ -41,4 +52,4 @@ var makeResponse = function(response, data){
 }
 
 exports.create = create;
-
+exports.find = find;

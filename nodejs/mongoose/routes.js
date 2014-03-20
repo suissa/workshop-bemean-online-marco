@@ -13,14 +13,7 @@ var beerCreate = function(request, response){
 }
  
 var beerRetrieve = function(request, response){
-    Beer.find(function (err, beers) {
-      if(err) {
-        console.log(err);
-      } else {
-        console.log(beers);
-            makeResponse(response, beers);
-      }
-    })
+  _model.find(request, response);
 }
  
 var beerUpdate = function(request, response){
