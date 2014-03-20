@@ -28,7 +28,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
+// Aqui temos a definição das nossas rotas
+// Observe como é a sintaxe da rota: app.verbo_do_http(url, funcao)
 app.get('/', routes.index);
+// conferir a função em ./routes/user.js
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
