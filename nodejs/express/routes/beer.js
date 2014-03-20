@@ -20,11 +20,12 @@ var beerRetrieve = function(req, res){
 }
  
 var beerUpdate = function(req, res){
-
-  var query = {name: 'Skol'};
-  
-  var mod = {description: '12345678'};
-
+  // nome da cerveja a ser alterada
+  var name = req.params.name;
+  // query da cerveja a ser alterada
+  var query = {name: name};
+  // dados a serem modificados
+  var mod = req.body;
   _model.update(req, res, query, mod);
 }
  

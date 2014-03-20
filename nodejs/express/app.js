@@ -46,7 +46,7 @@ app.post('/beer', beer.create);
 // retrieve
 app.get('/beer', beer.retrieve);
 // update
-app.get('/beer/update', beer.update);
+app.put('/beer/:name', beer.update);
 // create
 app.get('/beer/delete', beer.delete);
 
