@@ -45,6 +45,29 @@ var find = function(request, response){
   });
 }
 
+var update = function(request, response, query, mod){
+  _model.update(query, mod, function(err, beer) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log('Cerveja atualizada com sucesso');
+      makeResponse(response, beer);
+    }
+  });
+} 
+
+var get = function(request, response, query){
+  _model.findOne(query, function (err, beers) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(beers);
+      makeResponse(response, beers);
+    }
+  })
+}
+
+
 var makeResponse = function(response, data){
   response.writeHead(200, {"Content-Type": "text/plain"});
   response.write(JSON.stringify(data));
@@ -53,3 +76,12 @@ var makeResponse = function(response, data){
 
 exports.create = create;
 exports.find = find;
+exports.update = update;
+exports.get = get;
+
+
+
+
+
+
+

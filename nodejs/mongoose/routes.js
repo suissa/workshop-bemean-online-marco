@@ -18,31 +18,17 @@ var beerRetrieve = function(request, response){
  
 var beerUpdate = function(request, response){
 
-    var query = {name: 'Heineken'};
-    
-    var mod = {alcohol: 4};
+  var query = {name: 'Heineken'};
+  
+  var mod = {description: 'TESTE'};
 
-    Beer.update(query, mod, function(err, beer) {
-      if(err) {
-        console.log(err);
-      } else {
-        console.log('Cerveja atualizada com sucesso');
-            makeResponse(response, beer);
-      }
-    });
+  _model.update(request, response, query, mod);
 }
  
 var beerDelete = function(request, response){
     var query = {name: 'Skol'};
 
-    Beer.remove(query, function(err, beer) {
-      if(err) {
-        console.log(err);
-      } else {
-        console.log('Cerveja deletada com sucesso');
-        makeResponse(response, beer);
-      }
-    });
+    _model.delete(request, response, query);
 }
 
 var beerGet = function(request, response){
@@ -50,14 +36,7 @@ var beerGet = function(request, response){
   var id = url.split('/').slice(2,3);
   var query = {_id: id};
 
-  Beer.findOne(query, function (err, beers) {
-    if(err) {
-      console.log(err);
-    } else {
-      console.log(beers);
-      makeResponse(response, beers);
-    }
-  })
+  _model.get(request, response, query);
 }
 
 exports.create = beerCreate;
