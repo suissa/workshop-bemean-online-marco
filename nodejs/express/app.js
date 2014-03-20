@@ -46,6 +46,9 @@ app.post('/beer', beer.create);
 // retrieve
 app.get('/beer', beer.retrieve);
 // update
+// na url /beer virá o nome da beer depois
+// onde ela será transformada em req.param.name
+// pois o req.params são as váriaveis setadas nas rotas
 app.put('/beer/:name', beer.update);
 // delete
 app.delete('/beer/:name', beer.delete);
