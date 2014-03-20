@@ -67,6 +67,17 @@ var get = function(request, response, query){
   })
 }
 
+var remove = function(request, response, query){
+  _model.remove(query, function(err, beer) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log('Cerveja deletada com sucesso');
+      makeResponse(response, beer);
+    }
+  });
+}
+
 
 var makeResponse = function(response, data){
   response.writeHead(200, {"Content-Type": "text/plain"});
@@ -74,11 +85,12 @@ var makeResponse = function(response, data){
   response.end();
 }
 
+
 exports.create = create;
 exports.find = find;
 exports.update = update;
 exports.get = get;
-
+exports.delete = remove;
 
 
 
