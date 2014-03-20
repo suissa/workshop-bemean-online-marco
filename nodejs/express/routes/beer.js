@@ -9,6 +9,9 @@ var beerCreate = function(req, res){
     category: 'pilsen'
   }
 
+// para utilizarmos o req.body precisamos adicionar o bodyParser() nas configurações
+  var dados = req.body
+
   _model.create(req, res, dados);
 }
  
