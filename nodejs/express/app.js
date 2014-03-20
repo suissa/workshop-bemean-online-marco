@@ -38,8 +38,14 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 // Beer API
-// find
+// create
+app.get('/beer/create', beer.create);
+// retrieve
 app.get('/beer', beer.retrieve);
+// create
+app.get('/beer/update', beer.update);
+// create
+app.get('/beer/delete', beer.delete);
 
 
 http.createServer(app).listen(app.get('port'), function(){

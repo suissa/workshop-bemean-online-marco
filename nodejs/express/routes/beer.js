@@ -26,14 +26,16 @@ var beerUpdate = function(req, res){
 }
  
 var beerDelete = function(req, res){
-    var query = {name: 'Skol'};
+  var url = req.url; // /beer/83748923hdnskajfo
+  // var name = url.split('/').slice(3,4);
+  var query = {name: 'Heineken'};
 
-    _model.delete(req, res, query);
+  _model.delete(req, res, query);
 }
 
 var beerGet = function(req, res){
   var url = req.url; // /beer/83748923hdnskajfo
-  var id = url.split('/').slice(2,3);
+  var id = url.split('/').slice(3,4);
   var query = {_id: id};
 
   _model.get(req, res, query);
