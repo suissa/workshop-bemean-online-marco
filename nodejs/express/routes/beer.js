@@ -3,7 +3,7 @@ var _model = require("../models/beer");
  
 var beerCreate = function(req, res){
   var dados = {
-    name: 'Norteña',
+    name: 'Skol',
     description: 'Buena',
     alcohol: 4.5,
     category: 'pilsen'
@@ -18,9 +18,9 @@ var beerRetrieve = function(req, res){
  
 var beerUpdate = function(req, res){
 
-  var query = {name: 'Heineken'};
+  var query = {name: 'Skol'};
   
-  var mod = {description: 'TESTE'};
+  var mod = {description: '12345678'};
 
   _model.update(req, res, query, mod);
 }
@@ -46,3 +46,5 @@ exports.retrieve = beerRetrieve;
 exports.update = beerUpdate;
 exports.delete = beerDelete;
 exports.get = beerGet;
+
+

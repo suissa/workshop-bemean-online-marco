@@ -42,7 +42,7 @@ app.get('/users', user.list);
 app.get('/beer/create', beer.create);
 // retrieve
 app.get('/beer', beer.retrieve);
-// create
+// update
 app.get('/beer/update', beer.update);
 // create
 app.get('/beer/delete', beer.delete);
