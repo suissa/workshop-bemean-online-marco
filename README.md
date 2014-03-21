@@ -215,6 +215,12 @@ http://docs.angularjs.org/api/ng/directive/ngRepeat
 
 
 
+**REFATORAÇÃO**
+
+Para tirarmos o módulo do escopo global, a melhor prática é setar o módulo
+em uma variável local.
+
+
 #Rotas
 Na versão dos exemplos, 1.0.4, ainda o ngRoute não é um módulo a parte
 por isso não necessitamos de nenhuma dependencia externa, depois
@@ -226,9 +232,11 @@ provedor de rotas.
 
 Com o módulo de routeProvider utilizamos o when para criarmos nossas rotas:
 
-    .when('/contatos', 
-      {templateUrl: 'partials/contact-list.html',   
-      controller: PhoneListCtrl})
+    config(['$routeProvider', function($routeProvider) {
+      $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
+      $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
+      $routeProvider.otherwise({redirectTo: '/view1'});
+    }])
 
     Adiciona uma nova definição de rota para o serviço $route
 
@@ -236,6 +244,7 @@ Com o módulo de routeProvider utilizamos o when para criarmos nossas rotas:
     templateUrl: passa o endereço de um template HTML
     controller: o controller a ser executado na rota requisitada
 
+O otherwise é a regra para quando a rota requisitada não for encontrada.
 
 Exemplo de rotas com angular-seed
 git clone git@github.com:angular/angular-seed.git
