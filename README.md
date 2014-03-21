@@ -215,6 +215,33 @@ http://docs.angularjs.org/api/ng/directive/ngRepeat
 
 
 
+#Rotas
+Na versão dos exemplos, 1.0.4, ainda o ngRoute não é um módulo a parte
+por isso não necessitamos de nenhuma dependencia externa, depois
+atualizarei com outros exemplos com a versão atual.
+
+Para escrevermos nossas rotas utilizamos a função de config do module,
+onde injetamos como dependencia o $routeProvider, o qual é nosso
+provedor de rotas.
+
+Com o módulo de routeProvider utilizamos o when para criarmos nossas rotas:
+
+    .when('/contatos', 
+      {templateUrl: 'partials/contact-list.html',   
+      controller: PhoneListCtrl})
+
+    Adiciona uma nova definição de rota para o serviço $route
+
+    template: passa uma string html para ser usada na view
+    templateUrl: passa o endereço de um template HTML
+    controller: o controller a ser executado na rota requisitada
+
+
+Exemplo de rotas com angular-seed
+git@github.com:angular/angular-seed.git
+
+
+
 
 
 
