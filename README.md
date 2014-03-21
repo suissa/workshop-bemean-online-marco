@@ -238,7 +238,7 @@ Com o módulo de routeProvider utilizamos o when para criarmos nossas rotas:
 
 
 Exemplo de rotas com angular-seed
-git@github.com:angular/angular-seed.git
+git clone git@github.com:angular/angular-seed.git
 
 
 
