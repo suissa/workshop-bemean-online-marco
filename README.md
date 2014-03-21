@@ -240,6 +240,36 @@ Com o módulo de routeProvider utilizamos o when para criarmos nossas rotas:
 Exemplo de rotas com angular-seed
 git clone git@github.com:angular/angular-seed.git
 
+O angular-ssed é um ótimo projeto para iniciarmos rapidamente alguma prova
+de conceito com o angular, além desse projeto também iremos utilizar um
+do mesmo autor, https://github.com/btford, o ['angular-express-seed'](https://github.com/btford/angular-express-seed)
+
+Analisando o código nós vemos que na pasta de app temos um index.html, é apenas ele
+que é inicialmente carregado, pois como o AngularJs se trata de um framework [SPA]()
+então o resto das views serão carregadas dinamicamente. Como vemos nas rotas:
+
+- /view1
+- /view2
+
+Então como então sendo carregadas essas views?
+
+Vamos analisa o código do index.html
+
+    <div ng-view></div>
+
+Essa é a chamada para nossa view setada na rota em app/js/app.js:
+
+    $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
+    $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
+
+Então nós estamos trocando apenas o conteúdo do ng-view e quando entramos em
+cada rotao Angular irá buscar no caminho setado em templateUrl para trocar
+a view no nosso arquivo.
+
+
+
+
+
 
 
 
