@@ -36,22 +36,24 @@ angular.module('myApp.controllers', []).
 
 
     $scope.cadastrar = function(form){
+      var url = '/api/beer';
       var dados = form;
       console.log('Salvando: ', dados);
 
       $http({
         method: 'POST',
-        url: '/api/beer'
+        url: url, // url a ser requisitada
+        data: dados // dados da cerveja a ser inserida
       }).
       success(function (data, status, headers, config) {
         var dados = $scope.form;
-        $scope.retorno = data;
+        console.log('dados: ', dados);
+        $scope.msg = data;
       }).
       error(function (data, status, headers, config) {
-        $scope.retorno = 'Error!';
+        $scope.msg = 'Error!';
       });
-    }
-    
+   }; // fim cadastrar 
 
   }).
   controller('MyCtrl1', function ($scope) {

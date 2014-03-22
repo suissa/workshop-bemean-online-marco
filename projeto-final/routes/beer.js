@@ -3,7 +3,8 @@ var _model = require("../models/beer");
 var beerCreate = function(req, res){
 // para utilizarmos o req.body precisamos adicionar 
 // o bodyParser() nas configurações
-  var dados = req.body
+  var dados = req.body;
+  console.log('Recebi no backend: ', dados);
   _model.create(req, res, dados);
 }
  

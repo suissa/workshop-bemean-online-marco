@@ -395,6 +395,7 @@ de cadastrod e cervejas, para isso criamos nossa rota:
       controller: 'BeerController'
     })
 
+Depois criamos nosso rota, vamos criar nosso formulário:
 
     form(data-ng-submit='cadastrar(form)')
       label Nome
@@ -407,7 +408,42 @@ de cadastrod e cervejas, para isso criamos nossa rota:
         textarea(type='text', data-ng-model='form.description')
 
 
+Como podemos percerber no FORM nós temos a diretiva [ng-submit](http://docs.angularjs.org/api/ng/directive/ngSubmit) onde irá executar a função cadastrar,
+que será criada em nosso BeerController, passando como parâmetro o form, 
+encapsulado em ng-model. Nossa função ficará da seguinte forma:
+
+    $scope.cadastrar = function(){
+      var url = '/api/beer';
+      $http({
+        method: 'POST',
+        url: url
+      }).
+      success(function (data, status, headers, config) {
+        var dados = $scope.form;
+        console.log('dados: ', dados);
+        $scope.msg = data;
+      }).
+      error(function (data, status, headers, config) {
+        $scope.msg = 'Error!';
+      });
+    }
 
 
 
+
+
+
+**refatoração de código**
+
+    var makeResponse = function(response, data){
+      response.writeHead(200, {"Content-Type": "text/plain"});
+      response.write(JSON.stringify(data));
+      response.end();
+    }
+
+
+    // vira isso por causa do json do express
+    var makeResponse = function(res, data){
+      res.json(data);
+    }
 
