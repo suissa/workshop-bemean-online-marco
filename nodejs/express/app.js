@@ -42,18 +42,18 @@ app.get('/users', user.list);
 
 // Beer API
 // create
-app.post('/beer', beer.create);
+app.post('/api/beer', beer.create);
 // retrieve
-app.get('/beer', beer.retrieve);
+app.get('/api/beer', beer.retrieve);
 // update
 // na url /beer virá o nome da beer depois
 // onde ela será transformada em req.param.name
 // pois o req.params são as váriaveis setadas nas rotas
-app.put('/beer/:name', beer.update);
+app.put('/api/beer/:name', beer.update);
 // delete
-app.delete('/beer/:name', beer.delete);
+app.delete('/api/beer/:name', beer.delete);
 // get
-app.get('/beer/:name', beer.get);
+app.get('/api/beer/:name', beer.get);
 
 
 http.createServer(app).listen(app.get('port'), function(){

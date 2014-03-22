@@ -297,6 +297,93 @@ como base o ['angular-express-seed'](http://github.com:btford/angular-express-se
 
     git clone git@github.com:btford/angular-express-seed.git
 
+Após clonarmos entramos na pasta angular-express-seed e instalamos as dependencias:
+
+    npm install
+
+Primeira coisa que faremos para integrar, será o MongoDb. Logo precisamos
+instalar a dependencia do mongoose.
+
+    npm install mongoose --save
+
+Agora vamos rodar e ver como o projeto se comporta.
+
+    node app
+
+Primeira ação que faremos será criar uma rota para uma listagem das nossas cervejas.
+Para isso editamos o arquivo public/js/app.js e adicionamos nossa rota:
+
+    when('/beer', {
+      templateUrl: 'partials/list',
+      controller: 'BeerController'
+    })
+
+Antes de tudo precisamos criar nossa partial list, que será salva em views/partials.
+
+    h2 MEAN Cervejaria
+
+    {{ cervejas }}
+
+Nessa view estamos utilizando o jade, pois quem irá renderizar a view será nosso
+backend em Node.js + Express. Para diminuir a carga de renderização do client-side.
+
+Para conseguirmos retornar algum dado para essa view, teremos que criar nossa API 
+no backend e consumí-la com no Angular.
+
+Então vamos criar nossas rotas no arquivo app.js, para facilitar nosso trabalho
+re-usaremos as rotas já criadas anteriormente.
+`pegar rotas em /nodejs/express/app.js`
+
+**dica**: não esquecer de adicionar o módulo de beer 
+    beer = require('./routes/beer')
+
+
+    // Beer API
+    // create
+    app.post('/api/beer', beer.create);
+    // retrieve
+    app.get('/api/beer', beer.retrieve);
+    // update
+    app.put('/api/beer/:name', beer.update);
+    // delete
+    app.delete('/api/beer/:name', beer.delete);
+    // get
+    app.get('/api/beer/:name', beer.get);
+
+Após criarmos nossas rotas, precisamos integrar nosso controller e model.
+Primeiramente vamos integrar nosso model com no mongoose, reaproveitando de
+`/nodejs/express/models/beer.js`
+
+Após criado o model beer.js em models, precisamos criar nosso controller, 
+reaproveitando de `/nodejs/express/routes/beer.js`
+
+
+
+**WORKFLOW DO MEAN**
+criar uma rota -> criar uma view -> criar um controller -> criar uma requisição
+para o backedn -> criar a rota no node.js -> criar o controller - criar o model
+
+Depois de acertarmos o backend, vamos voltar para nosso controller BeerController
+no angular, para que possamos criar a requisição para nosso backend.
+
+   controller('BeerController', function ($scope, $http) {
+
+      $http({
+        method: 'GET',
+        url: '/api/beer'
+      }).
+      success(function (data, status, headers, config) {
+        // Se ocorrer sucesso injetarei o resultado na variavel
+        // cerveja no nosso escopo local
+        $scope.cervejas = data;
+      }).
+      error(function (data, status, headers, config) {
+        // Se ocorrer sucesso injetarei o Error na variavel
+        // cerveja no nosso escopo local
+        $scope.cervejas = 'Error!';
+      });
+
+    })
 
 
 
