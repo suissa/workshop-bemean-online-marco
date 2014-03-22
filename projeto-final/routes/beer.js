@@ -14,12 +14,12 @@ var beerRetrieve = function(req, res){
  
 var beerUpdate = function(req, res){
   // nome da cerveja a ser alterada
-  var name = req.params.name;
+  var id = req.params.id;
   // query da cerveja a ser alterada
-  var query = {name: name};
+  var query = {_id: id};
   // dados a serem modificados
   var mod = req.body;
-  console.log(mod, query);
+  console.log('Alterar: ', query, mod);
   _model.update(req, res, query, mod);
 }
  

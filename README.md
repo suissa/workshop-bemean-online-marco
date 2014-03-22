@@ -520,6 +520,97 @@ Depois refatoramos a função beerGet em routes:
     }
 
 ##Update - Alterar
+Vamos **refatorar** nossa view de get para que os valores estejam em inputs.
+
+    h2 MEAN Cervejaria
+
+    p
+      strong=msg
+
+    h3 Cerveja consultada
+      form
+        p
+          | name: {{ cerveja.name }}
+          label
+            input(type='text', data-ng-model='cerveja.name')
+          br
+          | alcohol: {{ cerveja.alcohol }}
+          label
+            input(type='text', data-ng-model='cerveja.alcohol')
+          br
+          | category: {{ cerveja.category }}
+          label
+            input(type='text', data-ng-model='cerveja.category')
+          br
+          | description: {{ cerveja.description }}
+          label
+            textarea(type='text', data-ng-model='cerveja.description')
+          br
+
+    button(data-ng-click='alterar(cerveja)') DELETAR
+
+Depois disso precisamos criar nossa função de alterar no nosso BeerGetController:
+
+    $scope.alterar = function(cerveja){
+      console.log(cerveja._id);
+      var url = '/api/beer/'+cerveja._id;
+      console.log('url', url); // em app.js '/api/beer/:id', beer.update
+
+      $http({
+        method: 'PUT',
+        url: url
+      }).
+      success(function (data, status, headers, config) {
+        var msg = 'Cerveja alterada';
+        $scope.msg = msg;
+        console.log(msg);
+      }).
+      error(function (data, status, headers, config) {
+        var msg = 'Error! Cerveja não alterada';
+        $scope.cerveja = msg;
+        console.log(msg);
+      });
+    }
+
+Para funcionar precisamos refatoramos a função beerUpdate em routes:
+
+var beerUpdate = function(req, res){
+  // nome da cerveja a ser alterada
+  var id = req.params.id;
+  // query da cerveja a ser alterada
+  var query = {_id: id};
+  // dados a serem modificados
+  var mod = req.body;
+  console.log(mod, query);
+  _model.update(req, res, query, mod);
+}
+
+
+Caso mandarmos o registro inteiro com _id o mongoose retornará o seguinte erro:
+
+    Alterar:  { _id: '532a4fee5594810000d8dfdd' } { __v: 0,
+      _id: '532a4fee5594810000d8dfdd',
+      alcohol: '1',
+      created: '2014-03-20T02:18:22.453Z',
+      category: 'pilsen',
+      description: '12345678',
+      name: 'Skol' }
+    { [MongoError: Mod on _id not allowed]
+      name: 'MongoError',
+      err: 'Mod on _id not allowed',
+      code: 10148,
+      n: 0,
+      connectionId: 1042,
+      ok: 1 }
+
+Então para isso nós precisamos montar nosso objeto a ser modificado.
+
+    var dados = {
+        name: cerveja.name,
+        alcohol: cerveja.alcohol,
+        category: cerveja.category,
+        description: cerveja.description,
+      };      
 
 ##Delete - Deletar
 Para deletarmos uma cerveja o faremos pelo _id do nosso objeto, mas não precisaremos
@@ -566,5 +657,6 @@ Depois refatoramos a função beerDelete em routes:
 
       _model.delete(req, res, query);
     }
+
 
 

@@ -40,7 +40,7 @@ var find = function(request, response){
       console.log(err);
     } else {
       console.log(beers);
-          makeResponse(response, beers);
+        makeResponse(response, beers);
     }
   });
 }

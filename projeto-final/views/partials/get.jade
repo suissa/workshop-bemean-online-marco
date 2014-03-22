@@ -4,16 +4,27 @@ p
   strong=msg
 
 h3 Cerveja consultada
-  p
-    | name: {{ cerveja.name }}
-    br
-    | alcohol: {{ cerveja.alcohol }}
-    br
-    | category: {{ cerveja.category }}
-    br
-    | description: {{ cerveja.description }}
-    br
+  form
+    p
+      | name: {{ cerveja.name }}
+      label
+        input(type='text', data-ng-model='cerveja.name')
+      br
+      | alcohol: {{ cerveja.alcohol }}
+      label
+        input(type='text', data-ng-model='cerveja.alcohol')
+      br
+      | category: {{ cerveja.category }}
+      label
+        input(type='text', data-ng-model='cerveja.category')
+      br
+      | description: {{ cerveja.description }}
+      label
+        textarea(type='text', data-ng-model='cerveja.description')
+      br
 
+button(data-ng-click='alterar(cerveja)') ALTERAR
 button(data-ng-click='deletar(cerveja)') DELETAR
+
 
 

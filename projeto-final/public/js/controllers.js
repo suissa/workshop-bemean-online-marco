@@ -80,6 +80,36 @@ angular.module('myApp.controllers', []).
       console.log('Error: ', data);
     });
 
+    $scope.alterar = function(cerveja){
+      console.log(cerveja._id);
+      var url = '/api/beer/'+cerveja._id;
+      console.log('url', url); // em app.js '/api/beer/:id', beer.update
+
+      var dados = {
+        name: cerveja.name,
+        alcohol: cerveja.alcohol,
+        category: cerveja.category,
+        description: cerveja.description,
+      };
+
+      $http({
+        method: 'PUT',
+        url: url,
+        data: dados
+      }).
+      success(function (data, status, headers, config) {
+        var msg = 'Cerveja alterada';
+        $scope.msg = msg;
+        console.log(msg);
+        console.log('Data: ', data);
+      }).
+      error(function (data, status, headers, config) {
+        var msg = 'Error! Cerveja não alterada';
+        $scope.cerveja = msg;
+        console.log(msg);
+      });
+    }
+
     $scope.deletar = function(cerveja){
       console.log(cerveja._id);
       var url = '/api/beer/'+cerveja._id;
