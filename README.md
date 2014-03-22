@@ -291,7 +291,11 @@ $http.get(url)
 Toda a reuqisição feita pelo $http irá retornar uma promisse.
 
 
+#Integração MEAN
+Para agilizarmos nosso processo de criação de um projeto em MEAN, vamos utilizar
+como base o ['angular-express-seed'](http://github.com:btford/angular-express-seed.git)
 
+    git clone git@github.com:btford/angular-express-seed.git
 
 
 
