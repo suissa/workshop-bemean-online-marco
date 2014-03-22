@@ -360,7 +360,7 @@ reaproveitando de `/nodejs/express/routes/beer.js`
 
 
 **WORKFLOW DO MEAN**
-criar uma rota -> criar uma view -> criar um controller -> criar uma requisição
+    criar uma rota -> criar uma view -> criar um controller -> criar uma requisição
 para o backedn -> criar a rota no node.js -> criar o controller - criar o model
 
 Depois de acertarmos o backend, vamos voltar para nosso controller BeerController
@@ -384,6 +384,7 @@ no angular, para que possamos criar a requisição para nosso backend.
       });
 
     })
+
 
 
 
