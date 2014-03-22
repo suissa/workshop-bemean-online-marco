@@ -431,7 +431,7 @@ encapsulado em ng-model. Nossa função ficará da seguinte forma:
       error(function (data, status, headers, config) {
         $scope.msg = 'Error!';
       });
-   }; // fim cadastrar 
+    }; // fim cadastrar 
 
 
 **refatoração de código**
