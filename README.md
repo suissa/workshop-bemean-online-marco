@@ -386,6 +386,9 @@ no angular, para que possamos criar a requisição para nosso backend.
     })
 
 
+Após criarmos nossa primeira funcionalidade vamos criar nosso primeiro formulário
+de cadastrod e cervejas, para isso criamos nossa rota:
+
 
 
 
