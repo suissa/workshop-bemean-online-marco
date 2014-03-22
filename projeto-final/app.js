@@ -58,11 +58,11 @@ app.get('/api/beer', beer.retrieve);
 // na url /beer virá o nome da beer depois
 // onde ela será transformada em req.param.name
 // pois o req.params são as váriaveis setadas nas rotas
-app.put('/api/beer/:name', beer.update);
+app.put('/api/beer/:id', beer.update);
 // delete
-app.delete('/api/beer/:name', beer.delete);
+app.delete('/api/beer/:id', beer.delete);
 // get
-app.get('/api/beer/:name', beer.get);
+app.get('/api/beer/:id', beer.get);
 
 
 // redirect all others to the index (HTML5 history)

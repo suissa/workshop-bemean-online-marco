@@ -17,7 +17,7 @@ angular.module('myApp.controllers', []).
     });
 
   }).
-  controller('BeerController', function ($scope, $http) {
+  controller('BeerController', function ($scope, $http, $routeParams) {
 
     $http({
       method: 'GET',
@@ -55,7 +55,31 @@ angular.module('myApp.controllers', []).
       });
    }; // fim cadastrar 
 
+    $scope.get = function(){
+      
+    }
+
   }).
+  controller('BeerGetController', ['$scope','$http', '$routeParams', function ($scope, $http, $routeParams) {
+    // o id vem da nossa rota /beer/:id
+    // Como o req.params.id no Express
+    var id = $routeParams.id;   
+
+    // Com o id a ser buscado, passarei para minha API
+    var url = '/api/beer/'+id;
+    $http({
+      method: 'GET',
+      url: url
+    }).
+    success(function (data, status, headers, config) {
+      $scope.cerveja = data;
+      console.log('Cerveja: ', data);
+    }).
+    error(function (data, status, headers, config) {
+      $scope.cerveja = 'Error!';
+      console.log('Error: ', data);
+    });
+  }]).
   controller('MyCtrl1', function ($scope) {
     // write Ctrl here
 

@@ -386,8 +386,9 @@ no angular, para que possamos criar a requisição para nosso backend.
     })
 
 
+##Create - Cadastrar
 Após criarmos nossa primeira funcionalidade vamos criar nosso primeiro formulário
-de cadastrod e cervejas, para isso criamos nossa rota:
+de cadastro de cervejas, para isso criamos nossa rota:
 
 
     when('/beer/create', {
@@ -412,11 +413,15 @@ Como podemos percerber no FORM nós temos a diretiva [ng-submit](http://docs.ang
 que será criada em nosso BeerController, passando como parâmetro o form, 
 encapsulado em ng-model. Nossa função ficará da seguinte forma:
 
-    $scope.cadastrar = function(){
+    $scope.cadastrar = function(form){
       var url = '/api/beer';
+      var dados = form;
+      console.log('Salvando: ', dados);
+
       $http({
         method: 'POST',
-        url: url
+        url: url, // url a ser requisitada
+        data: dados // dados da cerveja a ser inserida
       }).
       success(function (data, status, headers, config) {
         var dados = $scope.form;
@@ -426,11 +431,7 @@ encapsulado em ng-model. Nossa função ficará da seguinte forma:
       error(function (data, status, headers, config) {
         $scope.msg = 'Error!';
       });
-    }
-
-
-
-
+   }; // fim cadastrar 
 
 
 **refatoração de código**
@@ -446,4 +447,80 @@ encapsulado em ng-model. Nossa função ficará da seguinte forma:
     var makeResponse = function(res, data){
       res.json(data);
     }
+
+##Retrieve - Consultar
+Para consultarmos uma cerveja o faremos pelo _id do nosso objeto, então criamos
+a seguinte rota:
+
+    when('/beer/:id', {
+      templateUrl: 'partials/get',
+      controller: 'BeerGetController'
+    })
+
+Perceba que agora utilizamos o identificador :id para que aceitemos variáveis 
+nessa rota. Vamos criar nossa view get em partials:
+
+    h2 MEAN Cervejaria
+
+    h3 Cerveja consultada
+      p
+        | name: {{ cerveja.name }}
+        br
+        | alcohol: {{ cerveja.alcohol }}
+        br
+        | category: {{ cerveja.category }}
+        br
+        | description: {{ cerveja.description }}
+        br
+
+Então vamos criar nossa função que irá buscar nossa cerveja no BeerController.
+Precisamos injetar a dependecia do routeParams:
+
+    controller('BeerGetController', ['$scope','$http', '$routeParams', function ($scope, $http, $routeParams) 
+
+*O routeParams é o responsável por manipular as variáveis das rotas*
+
+Utilizamos a listagem das dependencias locais '$scope','$http' para que a 
+referência das dependencias sejam mantidas quando o arquivo for minificado.
+
+Nossa função de get da cerveja é essa:
+
+      var id = $routeParams.id;   
+
+      // Com o id a ser buscado, passarei para minha API
+      var url = '/api/beer/'+id;
+      $http({
+        method: 'GET',
+        url: url
+      }).
+      success(function (data, status, headers, config) {
+        $scope.cerveja = data;
+      }).
+      error(function (data, status, headers, config) {
+        $scope.cerveja = 'Error!';
+      });
+    }
+
+Para que essa função tenha sucesso, precisamos **refatorar** o código do node.js.
+Vamos refatorar o nome da variável das nossas rotas de name para id.
+
+    app.put('/api/beer/:id', beer.update);
+    // delete
+    app.delete('/api/beer/:id', beer.delete);
+    // get
+    app.get('/api/beer/:id', beer.get);
+
+Depois refatoramos a função beerGet em routes:
+
+    var beerGet = function(req, res){
+      var id = req.params.id;
+      var query = {_id: id};
+
+      _model.get(req, res, query);
+    }
+
+
+
+
+
 

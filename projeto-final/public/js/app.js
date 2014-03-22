@@ -26,6 +26,10 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/create',
       controller: 'BeerController'
     }).
+    when('/beer/:id', {
+      templateUrl: 'partials/get',
+      controller: 'BeerGetController'
+    }).
     otherwise({
       redirectTo: '/view1'
     });

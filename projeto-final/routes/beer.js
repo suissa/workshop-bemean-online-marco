@@ -32,8 +32,8 @@ var beerDelete = function(req, res){
 }
 
 var beerGet = function(req, res){
-  var name = req.params.name;
-  var query = {name: name};
+  var id = req.params.id;
+  var query = {_id: id};
 
   _model.get(req, res, query);
 }
