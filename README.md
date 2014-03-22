@@ -658,5 +658,21 @@ Depois refatoramos a função beerDelete em routes:
       _model.delete(req, res, query);
     }
 
+#Listagem
+Para finalizarmos nossa integração do MEAN, vamos refatorar nossa listagem. Começando
+pela view list:
+
+    h2 MEAN Cervejaria
+
+    h3 Cervjas JSON
+    {{ cervejas }}
+
+    ul
+      li(data-ng-repeat='cerveja in cervejas')
+        a(href='/beer/{{cerveja._id}}') 
+          {{ cerveja.name }} - {{ cerveja.category }} - {{ cerveja.alcohol }}
+
+Estamos utilizando a diretiva [ng-repeat](http://docs.angularjs.org/api/ng/directive/ngRepeat) para iterarmos no array das cervejas, adicionando um link com o atributo 
+href chamando nossa rota de get do Angular, entrando no formulário de alteração.
 
 

@@ -1,3 +1,9 @@
 h2 MEAN Cervejaria
 
+h3 Cervjas JSON
 {{ cervejas }}
+
+ul
+  li(data-ng-repeat='cerveja in cervejas')
+    a(href='/beer/{{cerveja._id}}') 
+      {{ cerveja.name }} - {{ cerveja.category }} - {{ cerveja.alcohol }}
