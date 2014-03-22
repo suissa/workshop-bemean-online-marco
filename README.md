@@ -276,6 +276,22 @@ cada rotao Angular irá buscar no caminho setado em templateUrl para trocar
 a view no nosso arquivo.
 
 
+#Ajax
+
+Vamos adicionar o módulo de $http para podermos criar as requisições em ajax.
+
+$http.get(url)
+.success(function(data) {
+  console.log(data);
+})
+.error(function(err){
+  console.log('Error: ', err)
+});
+
+Toda a reuqisição feita pelo $http irá retornar uma promisse.
+
+
+
 
 
 
