@@ -390,6 +390,21 @@ Após criarmos nossa primeira funcionalidade vamos criar nosso primeiro formulá
 de cadastrod e cervejas, para isso criamos nossa rota:
 
 
+    when('/beer/create', {
+      templateUrl: 'partials/create',
+      controller: 'BeerController'
+    })
+
+
+    form(data-ng-submit='cadastrar(form)')
+      label Nome
+        input(type='text', data-ng-model='form.name')
+      label Graduação Alcoólica
+        input(type='text', data-ng-model='form.alcohol')
+      label Tipo
+        input(type='text', data-ng-model='form.category')
+      label Descrição
+        textarea(type='text', data-ng-model='form.description')
 
 
 

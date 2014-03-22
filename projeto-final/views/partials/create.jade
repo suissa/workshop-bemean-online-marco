@@ -1,0 +1,16 @@
+h2 MEAN Cervejaria
+
+p 
+  | raw:
+  {{ cervejas }}
+
+form(data-ng-submit='cadastrar(form)')
+  label Nome
+    input(type='text', data-ng-model='form.name')
+  label Graduação Alcoólica
+    input(type='text', data-ng-model='form.alcohol')
+  label Tipo
+    input(type='text', data-ng-model='form.category')
+  label Descrição
+    textarea(type='text', data-ng-model='form.description')
+  input(type='submit') SALVAR

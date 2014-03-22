@@ -79,10 +79,8 @@ var remove = function(request, response, query){
 }
 
 
-var makeResponse = function(response, data){
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write(JSON.stringify(data));
-  response.end();
+var makeResponse = function(res, data){
+  res.json(data);
 }
 
 
