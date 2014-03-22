@@ -54,6 +54,8 @@ app.get('/api/name', api.name);
 app.post('/api/beer', beer.create);
 // retrieve
 app.get('/api/beer', beer.retrieve);
+// get
+app.get('/api/beer/:id', beer.get);
 // update
 // na url /beer virá o nome da beer depois
 // onde ela será transformada em req.param.name
@@ -61,8 +63,6 @@ app.get('/api/beer', beer.retrieve);
 app.put('/api/beer/:id', beer.update);
 // delete
 app.delete('/api/beer/:id', beer.delete);
-// get
-app.get('/api/beer/:id', beer.get);
 
 
 // redirect all others to the index (HTML5 history)

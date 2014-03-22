@@ -1,5 +1,8 @@
 h2 MEAN Cervejaria
 
+p
+  strong=msg
+
 h3 Cerveja consultada
   p
     | name: {{ cerveja.name }}
@@ -10,5 +13,7 @@ h3 Cerveja consultada
     br
     | description: {{ cerveja.description }}
     br
+
+button(data-ng-click='deletar(cerveja)') DELETAR
 
 

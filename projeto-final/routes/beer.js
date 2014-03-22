@@ -25,8 +25,8 @@ var beerUpdate = function(req, res){
  
 var beerDelete = function(req, res){
   var url = req.url; // /beer/83748923hdnskajfo
-  var name = req.params.name;
-  var query = {name: name};
+  var id = req.params.id;
+  var query = {_id: id};
 
   _model.delete(req, res, query);
 }

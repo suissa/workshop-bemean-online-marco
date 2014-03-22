@@ -448,7 +448,7 @@ encapsulado em ng-model. Nossa função ficará da seguinte forma:
       res.json(data);
     }
 
-##Retrieve - Consultar
+##Get - Consultar
 Para consultarmos uma cerveja o faremos pelo _id do nosso objeto, então criamos
 a seguinte rota:
 
@@ -519,8 +519,52 @@ Depois refatoramos a função beerGet em routes:
       _model.get(req, res, query);
     }
 
+##Update - Alterar
+
+##Delete - Deletar
+Para deletarmos uma cerveja o faremos pelo _id do nosso objeto, mas não precisaremos
+de uma rota no Angular pois utilizaremos uma função para acionar o delete do backend.
+
+Antes de criarmos nossa função vamos **refatorar** nossa view get, adicionando:
+
+    button(data-ng-click='deletar(cerveja)') DELETAR
+
+Vamos criar nossa função que irá deletar nossa cerveja no BeerGetController.
 
 
+      var id = $routeParams.id;   
 
+      // Com o id a ser buscado, passarei para minha API
+      var url = '/api/beer/'+id;
+      $http({
+        method: 'GET',
+        url: url
+      }).
+      success(function (data, status, headers, config) {
+        $scope.cerveja = data;
+      }).
+      error(function (data, status, headers, config) {
+        $scope.cerveja = 'Error!';
+      });
+    }
+
+Para que essa função tenha sucesso, precisamos **refatorar** o código do node.js.
+Vamos refatorar o nome da variável das nossas rotas de name para id.
+
+    app.put('/api/beer/:id', beer.update);
+    // delete
+    app.delete('/api/beer/:id', beer.delete);
+    // get
+    app.get('/api/beer/:id', beer.get);
+
+Depois refatoramos a função beerDelete em routes:
+
+    var beerDelete = function(req, res){
+      var url = req.url; // /beer/83748923hdnskajfo
+      var id = req.params.id;
+      var query = {_id: id};
+
+      _model.delete(req, res, query);
+    }
 
 

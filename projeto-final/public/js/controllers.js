@@ -79,6 +79,27 @@ angular.module('myApp.controllers', []).
       $scope.cerveja = 'Error!';
       console.log('Error: ', data);
     });
+
+    $scope.deletar = function(cerveja){
+      console.log(cerveja._id);
+      var url = '/api/beer/'+cerveja._id;
+      console.log('url', url);
+
+      $http({
+        method: 'DELETE',
+        url: url
+      }).
+      success(function (data, status, headers, config) {
+        var msg = 'Cerveja deletada';
+        $scope.msg = msg;
+        console.log(msg);
+      }).
+      error(function (data, status, headers, config) {
+        var msg = 'Error! Cerveja não deletada';
+        $scope.cerveja = msg;
+        console.log(msg);
+      });
+    }
   }]).
   controller('MyCtrl1', function ($scope) {
     // write Ctrl here
